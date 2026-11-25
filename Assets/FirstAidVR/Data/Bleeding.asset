@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b5fd04e8745234da07955e82eb9892, type: 3}
+  m_Name: Bleeding
+  m_EditorClassIdentifier: FirstAidVR::FirstAidVR.ScenarioDefinition
+  id: bleeding
+  title: Severe Bleeding
+  subtitle: A cyclist in the park has a deep cut on his forearm from broken glass. Control life-threatening bleeding until help arrives.
+  sceneName: Bleeding
+  introduction: 'You are walking through a park when you hear someone shout for help. A cyclist has fallen onto a broken bottle. He is lying on the grass and his forearm is bleeding heavily.
+
+
+    There is a first-aid kit on the bench next to you, and your phone.'
+  accent: {r: 0.9, g: 0.28, b: 0.3, a: 1}
+  targetTime: 150
+  certificationTimeLimit: 300
+  steps:
+  - id: scene_safe
+    title: Check the scene is safe
+    instruction: Before you help, look around for danger such as traffic, broken glass or other hazards. Turn your head to scan left and right.
+    feedback: The scene is safe. Now check on the person.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires: []
+    highlightTarget: 
+  - id: check_patient
+    title: Check the person
+    instruction: Walk up to the person, tap his shoulder with your hand and ask if he is okay.
+    feedback: He is awake and can talk to you.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after:
+    - scene_safe
+    requires: []
+    highlightTarget: Patient Shoulder
+  - id: recognize
+    title: Recognise life-threatening bleeding
+    instruction: Look at the wound and decide how serious it is.
+    feedback: Steady, pooling blood is life-threatening. Act fast.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - check_patient
+    highlightTarget: 
+  - id: call_911
+    title: Call 911
+    instruction: Pick up the phone from the bench and pull the TRIGGER to call 911 on speaker.
+    feedback: Help is on the way. Keep the phone on speaker.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 1
+    after:
+    - scene_safe
+    requires: []
+    highlightTarget: Phone
+  - id: gloves
+    title: Put on gloves
+    instruction: Grab the blue gloves from the first-aid kit and hold them for a moment to put them on. Gloves protect you and the patient.
+    feedback: Gloves on. (If you ever have no gloves, do not delay care for life-threatening bleeding.)
+    critical: 0
+    optional: 0
+    points: 5
+    requiredCount: 1
+    after:
+    - scene_safe
+    requires: []
+    highlightTarget: Gloves
+  - id: apply_dressing
+    title: Put a dressing on the wound
+    instruction: Pick up a sterile dressing from the kit and place it directly on the wound on his forearm.
+    feedback: The dressing is on the wound.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 1
+    after:
+    - call_911
+    - gloves
+    requires: []
+    highlightTarget: Dressing A
+  - id: apply_pressure
+    title: Press firmly and continuously
+    instruction: Put your hand on the dressing and hold GRIP (or TRIGGER) to press down hard. Keep steady pressure - do not let go or lift to check.
+    feedback: Firm, continuous pressure has controlled the bleeding.
+    critical: 1
+    optional: 0
+    points: 20
+    requiredCount: 1
+    after: []
+    requires:
+    - apply_dressing
+    highlightTarget: Pressure Zone
+  - id: soak_decision
+    title: If blood soaks through, don't remove the dressing
+    instruction: Blood is soaking through. Decide what to do.
+    feedback: Correct - leave the first dressing in place.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - apply_dressing
+    highlightTarget: 
+  - id: second_dressing
+    title: Add one more dressing on top
+    instruction: Place the second dressing on top of the first one, then keep pressing.
+    feedback: Second dressing on top. Keep pressing.
+    critical: 0
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - apply_dressing
+    highlightTarget: Dressing B
+  - id: bandage
+    title: Bandage over the dressings
+    instruction: The bleeding has stopped. Pick up the roller bandage and place it on the dressings to wrap them firmly.
+    feedback: The dressings are held firmly in place.
+    critical: 0
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - apply_pressure
+    highlightTarget: Roller Bandage
+  - id: check_circulation
+    title: Check circulation past the bandage
+    instruction: Touch his fingers to check they are warm and he can move them. A bandage that is too tight cuts off blood flow.
+    feedback: Fingers are warm - the bandage is not too tight.
+    critical: 0
+    optional: 0
+    points: 5
+    requiredCount: 1
+    after: []
+    requires:
+    - bandage
+    highlightTarget: Patient Fingers
+  - id: keep_warm
+    title: Keep him warm
+    instruction: Blood loss can lead to shock. Cover him with the emergency blanket from the kit to stop him getting cold.
+    feedback: Keeping him warm helps against shock.
+    critical: 0
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after:
+    - apply_dressing
+    requires: []
+    highlightTarget: Emergency Blanket
+  - id: reassure
+    title: Reassure him
+    instruction: Talk to him calmly and tell him help is coming.
+    feedback: Calm words help a frightened patient.
+    critical: 0
+    optional: 1
+    points: 5
+    requiredCount: 1
+    after: []
+    requires: []
+    highlightTarget: Talk Menu
+  mistakes:
+  - id: underestimated
+    title: Underestimated the bleeding
+    correction: 'Blood that flows steadily or pools on the ground is life-threatening: call 911 and press on it immediately.'
+    penalty: 15
+    critical: 0
+  - id: removed_dressing
+    title: Removed a soaked dressing
+    correction: Never remove the first dressing - it pulls away the clot. Add a dressing on top and keep pressing.
+    penalty: 15
+    critical: 0
+  - id: peeked
+    title: Lifted the dressing to check
+    correction: Keep pressure on continuously until the bleeding stops; lifting to look lets it restart.
+    penalty: 10
+    critical: 0
+  - id: pressure_released
+    title: Let go of the pressure early
+    correction: Keep firm, continuous pressure until the bleeding has stopped.
+    penalty: 5
+    critical: 0
+  - id: dressing_wrong_place
+    title: Dressing in the wrong place
+    correction: Place the dressing directly on the wound itself.
+    penalty: 5
+    critical: 0
+  - id: moved_patient
+    title: Asked him to get up
+    correction: Keep a seriously injured person still and lying down while you wait for EMS.
+    penalty: 10
+    critical: 0
+  keyPoints:
+  - Check the scene is safe, then call 911 (or have someone call).
+  - Put on gloves if you have them - but do not delay care for life-threatening bleeding.
+  - Apply a dressing and press firmly and continuously.
+  - 'If blood soaks through, do not remove the dressing: add one on top and keep pressing.'
+  - If direct pressure cannot control bleeding from an arm or leg, a tourniquet is used 2-3 inches above the wound (training required).
+  sources: American Red Cross (life-threatening bleeding), AHA/Red Cross 2024 First Aid Guidelines, Mayo Clinic.

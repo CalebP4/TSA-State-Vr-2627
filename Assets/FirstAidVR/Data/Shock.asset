@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b5fd04e8745234da07955e82eb9892, type: 3}
+  m_Name: Shock
+  m_EditorClassIdentifier: FirstAidVR::FirstAidVR.ScenarioDefinition
+  id: shock
+  title: Shock
+  subtitle: A hiker who has been vomiting all day is pale, cold and clammy. Recognise shock and care for him until help arrives.
+  sceneName: Shock
+  introduction: 'At a trailhead rest area, a hiker is slumped against a picnic bench. His friend says he has been vomiting and has had diarrhoea all day and couldn''t keep any water down.
+
+
+    He has no injuries from a fall. There is a first-aid kit with a blanket on the table.'
+  accent: {r: 0.96, g: 0.65, b: 0.14, a: 1}
+  targetTime: 130
+  certificationTimeLimit: 270
+  steps:
+  - id: scene_safe
+    title: Check the scene is safe
+    instruction: Look around for any danger before you help. Turn your head to scan left and right.
+    feedback: The area is safe.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires: []
+    highlightTarget: 
+  - id: check_patient
+    title: Check the person
+    instruction: Go to the hiker, tap his shoulder and ask how he feels.
+    feedback: He is awake but weak.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after:
+    - scene_safe
+    requires: []
+    highlightTarget: Patient Shoulder
+  - id: recognize
+    title: Recognise the signs of shock
+    instruction: Look at the signs and decide what is happening.
+    feedback: Pale, cool, clammy skin, fast breathing and weakness after fluid loss are signs of shock.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - check_patient
+    highlightTarget: 
+  - id: call_911
+    title: Call 911
+    instruction: Shock is a medical emergency. Pick up the phone and pull the TRIGGER to call 911.
+    feedback: Help is on the way.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 1
+    after:
+    - check_patient
+    requires: []
+    highlightTarget: Phone
+  - id: lay_down
+    title: Help him lie flat on his back
+    instruction: Grab his shoulder (GRIP) and gently move your hand down and away to help him lie down on his back.
+    feedback: Lying flat on his back helps blood flow.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 1
+    after: []
+    requires:
+    - check_patient
+    highlightTarget: Patient Shoulder
+  - id: raise_legs
+    title: Raise his feet (no injury)
+    instruction: Because he has no injury, you may raise his feet about 6-12 inches. Place the backpack under his feet. (Do not raise the legs if there is an injury.)
+    feedback: Feet raised. Lower them if it causes pain or makes him feel worse.
+    critical: 0
+    optional: 1
+    points: 5
+    requiredCount: 1
+    after: []
+    requires:
+    - lay_down
+    highlightTarget: Backpack
+  - id: keep_warm
+    title: Keep him warm
+    instruction: Cover him with the blanket from the first-aid kit to prevent heat loss.
+    feedback: The blanket stops him losing body heat.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 1
+    after:
+    - lay_down
+    requires: []
+    highlightTarget: Blanket
+  - id: reassure
+    title: Reassure him
+    instruction: Talk to him calmly. Anxiety makes shock worse.
+    feedback: Calm reassurance helps.
+    critical: 0
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after:
+    - check_patient
+    requires: []
+    highlightTarget: Talk Menu
+  - id: monitor
+    title: Monitor his breathing
+    instruction: Rest your hand on his chest for a few seconds to check his breathing. Keep watching him until EMS arrives.
+    feedback: Breathing is fast but steady. Keep monitoring.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after:
+    - keep_warm
+    requires:
+    - lay_down
+    highlightTarget: Breathing Zone
+  mistakes:
+  - id: gave_drink
+    title: Gave him something to drink
+    correction: Do not give food or drink to someone in shock - they may vomit and choke.
+    penalty: 15
+    critical: 1
+  - id: walk_it_off
+    title: Told him to get up and walk
+    correction: Keep the person lying still; do not move them unnecessarily.
+    penalty: 10
+    critical: 0
+  - id: underestimated
+    title: Missed the signs of shock
+    correction: Pale, cool, clammy skin with fast breathing and weakness can mean shock - call 911.
+    penalty: 15
+    critical: 0
+  keyPoints:
+  - 'Signs of shock: pale or grey, cool, clammy skin; fast breathing; fast weak pulse; restlessness, thirst, weakness.'
+  - Call 911 - shock is life-threatening.
+  - Help the person lie on their back. If there is no injury, raising the feet 6-12 inches may help.
+  - Keep them warm, reassure them and do not give anything to eat or drink.
+  - Watch breathing and responsiveness until EMS arrives. If they vomit, roll them onto their side.
+  sources: AHA/Red Cross 2024 First Aid Guidelines (shock), American Red Cross (shock), Mayo Clinic.
