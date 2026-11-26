@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b5fd04e8745234da07955e82eb9892, type: 3}
+  m_Name: InfantChoking
+  m_EditorClassIdentifier: FirstAidVR::FirstAidVR.ScenarioDefinition
+  id: infant
+  title: Infant Choking
+  subtitle: A 9-month-old baby is choking on a piece of food and cannot cry or cough. Give back blows and chest thrusts.
+  sceneName: InfantChoking
+  introduction: 'You are visiting a friend. Their 9-month-old baby was eating small pieces of food on the play mat. Suddenly the baby goes quiet, looks panicked and cannot cry.
+
+
+    The parent is frozen with fear. A phone is on the table.'
+  accent: {r: 0.2, g: 0.55, b: 0.95, a: 1}
+  targetTime: 120
+  certificationTimeLimit: 240
+  steps:
+  - id: scene_safe
+    title: Check the scene is safe
+    instruction: Look around the room for any danger before you help. Turn your head to scan left and right.
+    feedback: The room is safe. Check the baby.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires: []
+    highlightTarget: 
+  - id: check_infant
+    title: Check the baby
+    instruction: Kneel by the baby on the play mat and touch the baby to check them.
+    feedback: You are with the baby.
+    critical: 1
+    optional: 0
+    points: 5
+    requiredCount: 1
+    after:
+    - scene_safe
+    requires: []
+    highlightTarget: Infant
+  - id: recognize
+    title: Recognise severe choking
+    instruction: Look at the signs and decide what is happening.
+    feedback: 'No cry, no cough, no breathing: this is severe choking.'
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - check_infant
+    highlightTarget: 
+  - id: call_911
+    title: Have someone call 911
+    instruction: 'Use the phone on the table: pull the TRIGGER to call 911 on speaker so your hands stay free.'
+    feedback: Help is on the way.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 1
+    after:
+    - recognize
+    requires: []
+    highlightTarget: Phone
+  - id: position_down
+    title: Hold the baby face-down, head lower than chest
+    instruction: Pick up the baby (GRIP). The baby lies face-down along your forearm. Tilt your hand so the baby's head is lower than the chest.
+    feedback: 'Good support: face-down, head lower than the chest.'
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - check_infant
+    highlightTarget: Infant
+  - id: back_blows_1
+    title: Give 5 back blows
+    instruction: With your other hand, give 5 firm back blows with the heel of your hand between the shoulder blades. Swing your hand down onto the baby's back.
+    feedback: 5 back blows done.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 5
+    after: []
+    requires:
+    - position_down
+    highlightTarget: Back Blow Zone
+  - id: chest_thrusts_1
+    title: Turn over and give 5 chest thrusts
+    instruction: Turn your hand over so the baby is face-up, head still lower than the chest. Push the heel of your other hand into the centre of the chest, just below the nipple line, 5 times.
+    feedback: 5 chest thrusts done.
+    critical: 1
+    optional: 0
+    points: 15
+    requiredCount: 5
+    after: []
+    requires:
+    - back_blows_1
+    highlightTarget: Chest Thrust Zone
+  - id: back_blows_2
+    title: 'Repeat: 5 more back blows'
+    instruction: The object is still stuck. Turn the baby face-down again and repeat the 5 back blows.
+    feedback: The object is out!
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 5
+    after: []
+    requires:
+    - chest_thrusts_1
+    highlightTarget: Back Blow Zone
+  - id: monitor
+    title: Check the baby is breathing
+    instruction: The baby is crying. Rest your hand on the baby's chest for a moment to check breathing, and stay with the baby until EMS arrives.
+    feedback: The baby is breathing and crying. Keep watching until help arrives.
+    critical: 1
+    optional: 0
+    points: 10
+    requiredCount: 1
+    after: []
+    requires:
+    - back_blows_2
+    highlightTarget: Breathing Zone
+  mistakes:
+  - id: finger_sweep
+    title: Blind finger sweep
+    correction: Never sweep your finger in a baby's mouth unless you can see the object - it can push it deeper.
+    penalty: 20
+    critical: 1
+  - id: abdominal_thrust
+    title: Abdominal thrusts on an infant
+    correction: Do not use abdominal thrusts on babies under 1 year. Use back blows and chest thrusts.
+    penalty: 20
+    critical: 1
+  - id: unsupported
+    title: Left the baby unsupported
+    correction: Keep holding and supporting the baby's head and body throughout.
+    penalty: 10
+    critical: 0
+  - id: underestimated
+    title: Misjudged the choking
+    correction: 'A baby who cannot cry, cough or breathe has a severe blockage: act immediately.'
+    penalty: 15
+    critical: 0
+  - id: waited
+    title: Waited for it to pass
+    correction: Severe choking will not clear on its own. Start back blows straight away.
+    penalty: 10
+    critical: 0
+  keyPoints:
+  - 'Signs of severe choking: cannot cry, cough or breathe; may turn bluish.'
+  - Have someone call 911 (use speaker if you are alone).
+  - 5 back blows face-down along your forearm, head lower than chest, jaw supported.
+  - 5 chest thrusts face-up with the heel of one hand on the centre of the chest (AHA 2025).
+  - Repeat until the object comes out or the baby becomes unresponsive (then start infant CPR).
+  - No blind finger sweeps and no abdominal thrusts for infants.
+  sources: AHA/AAP 2025 Pediatric Basic Life Support guidelines, American Red Cross (infant choking).
