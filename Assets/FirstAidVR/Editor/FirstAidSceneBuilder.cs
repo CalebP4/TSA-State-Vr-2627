@@ -182,7 +182,7 @@ namespace FirstAidVR.EditorTools
             fill.intensity = 1.2f;
             fill.transform.position = new Vector3(0, 2.8f, 0.8f);
 
-            Rig(Vector3.zero, 0f);
+            Rig(new Vector3(0, 1.35f, 0), 0f);
 
             var menu = new GameObject("Main Menu");
             var mm = menu.AddComponent<MainMenuManager>();
@@ -413,7 +413,7 @@ namespace FirstAidVR.EditorTools
             Ball("Helmet", env, new Vector3(-0.9f, 0.08f, 0.75f), new Vector3(0.24f, 0.16f, 0.3f), Mat("Helmet", Theme.Hex("F2C94C"), 0.5f));
 
             var (ctrl, ui) = ScenarioCore(def, new Vector3(-0.9f, 1.4f, 0.95f));
-            Rig(Vector3.zero, 0f);
+            Rig(new Vector3(0, 1.35f, 0), 0f);
 
             // Patient lying on the grass beside the path
             var (patient, vis, handR, forearmMid) = AdultLying(env, new Vector3(0.05f, 0, 1.25f),
