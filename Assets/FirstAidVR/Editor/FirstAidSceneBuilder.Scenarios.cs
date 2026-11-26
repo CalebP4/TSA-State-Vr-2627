@@ -87,7 +87,7 @@ namespace FirstAidVR.EditorTools
             Box("Snack Bowl", env, new Vector3(-0.45f, 0.77f, 0.95f), new Vector3(0.12f, 0.04f, 0.12f), Mat("Bowl", Theme.Hex("6FCF97"), 0.4f));
 
             var (ctrl, ui) = ScenarioCore(def, new Vector3(-0.95f, 1.45f, 0.75f));
-            Rig(new Vector3(0, 0, -0.05f), 0f);
+            Rig(new Vector3(0, 1.35f, -0.05f), 0f);
 
             // ---- The infant (grabbable). Local: head toward -X, face up (+Y). ----
             var restPos = new Vector3(0.02f, 0.84f, 0.78f);
@@ -211,7 +211,7 @@ namespace FirstAidVR.EditorTools
             Box("Stone Wall", wall, new Vector3(0, 0.33f, 0), new Vector3(1.4f, 0.66f, 0.45f), Mat("Stone", Theme.Hex("8C8C86"), 0.1f), true);
 
             var (ctrl, ui) = ScenarioCore(def, new Vector3(-0.95f, 1.4f, 0.9f));
-            Rig(Vector3.zero, 0f);
+            Rig(new Vector3(0, 1.35f, 0), 0f);
 
             // ---- Patient sitting on the ground (can be helped to lie back) ----
             var (patient, vis, handR, forearmMid) = AdultLying(env, new Vector3(0.1f, 0, 1.3f),
